@@ -1,22 +1,18 @@
-from array import *
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.proxy import Proxy, ProxyType
+
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from time import sleep, time
-import os
 import sys
 
-from random import randrange,randint
 
-#import certifi
-import ssl
 import base64
 import time
 
@@ -49,16 +45,10 @@ if txt_proxy != '':
 
 
 ######################################
-# решение капчи
+# решение капчи, не знаю считать ли это за тест но как минимум надеюсь обратите внимание т.к это стоило многих усилий
 def solve_cap():
 	
 	api_key = '927a533591c773afecd77dfbcebcf6c4'
-
-	#a = driver.find_element_by_css_selector('.rt-captcha__image').click();
-	#b = driver.find_element_by_css_selector('input.CheckboxCaptcha-Button').send_keys(Keys.RETURN)
-	#print(a)
-
-	#sleep(4)
 
 	cimg = driver.find_element_by_css_selector('.rt-captcha__image').get_attribute('src');
 
@@ -115,7 +105,7 @@ def get_driver():
 def test_vk():
     driver, wait = get_driver()
     wait.until(EC.presence_of_element_located((By.ID, 'oidc_vk'))).click()
-    time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
+    time.sleep(2)
 
     assert driver.current_url.__contains__('oauth.vk.com')
 
@@ -125,7 +115,7 @@ def test_vk():
 def test_ok():
     driver, wait = get_driver()
     wait.until(EC.presence_of_element_located((By.ID, 'oidc_ok'))).click()
-    time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
+    time.sleep(2)
 
     assert driver.current_url.__contains__('connect.ok.ru')
 
@@ -134,7 +124,7 @@ def test_ok():
 def test_mail():
     driver, wait = get_driver()
     wait.until(EC.presence_of_element_located((By.ID, 'oidc_mail'))).click()
-    time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
+    time.sleep(2)
 
     assert driver.current_url.__contains__('connect.mail.ru')
 
@@ -143,16 +133,16 @@ def test_mail():
 def test_google():
     driver, wait = get_driver()
     wait.until(EC.presence_of_element_located((By.ID, 'oidc_google'))).click()
-    time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
+    time.sleep(2)
 
     assert driver.current_url.__contains__('accounts.google.com')
 
 
-#  Переходв Yandex
+#  Переход в Yandex
 def test_yandex():
     driver, wait = get_driver()
     wait.until(EC.presence_of_element_located((By.ID, 'oidc_ya'))).click()
-    time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
+    time.sleep(2)
 
     assert driver.current_url.__contains__('oauth.yandex.ru')
     time.sleep(2)
@@ -174,61 +164,9 @@ def test_register(): #  Проверка открытия страницы ре�
     time.sleep(2)
 
 
-#def test_registration_number(): #  Проверка регистрации по номеру телефона - страница Регистрации
-   # driver, wait = get_driver()
-    #actionChain #= ActionChains(driver)
-
-    #wait.until(EC.presence_of_element_located((By.ID, 'kc-register'))).click()
-   # assert wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'card-container__title'))).text == 'Регистрация'
-   # wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input#password-confirm'))).click()
-   # actionChain.send_keys('Sergo123').perform()
-  #  wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input#password'))).click()
-   # actionChain.send_keys('Sergo123').perform()
-   # wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input#address'))).click()
-    #actionChain.send_keys('+79650694568').perform()
-    #wait.until(EC.presence_of_element_located((By.NAME, 'lastName'))).click()
-  #  actionChain.send_keys('Абалакин').perform()
-  #  wait.until(EC.presence_of_element_located((By.NAME, 'firstName'))).click()
-  #  actionChain.send_keys('Сергей').perform()
-   # time.sleep(2) # Для наглядности - в реальности тестирования закоментировать
-    #wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'section#page-right > div > div > div > form > div:nth-of-type(4) > div > div > div:nth-of-type(2) > svg'))).click()
-#    time.sleep(2) # Для наглядности - в реальности тестирования закоментировать
- #   wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'section#page-right > div > div > div > form > div:nth-of-type(4) > div:nth-of-type(2) > div > div:nth-of-type(2) > svg > path'))).click()
-  #  time.sleep(5) # Для наглядности - в реальности тестирования закоментировать
-  #  driver.find_element(By.NAME, 'register').click()
-  #  time.sleep(3) # Для наглядности - в реальности тестирования закоментировать
-
-   # confirmPage = wait.until(EC.presence_of_element_located((By.XPATH, "//h1[contains(text(),'Подтверждение телефона')]"))).text
-   # assert confirmPage == 'Подтверждение телефона'
 
 
-#def test_form_change():  #  Проверка изменения подсказки текста плейсхолдера в поле "Логин" при изменении
-
-
-    # способа авторизации формы авторизация
- #   driver, wait = get_driver()
- #   actionChain = ActionChains(driver)
-
- #   wait.until(EC.presence_of_element_located((By.XPATH, "//a[@id='forgot_password']"))).click()
- #   assert wait.until(EC.presence_of_element_located(
- #       (By.XPATH, "//h1[contains(text(),'Восстановление пароля')]"))).text == 'Восстановление пароля'
- #   tabButtons = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'rt-tab')))
-
- #   assert wait.until(EC.title_is('Ростелеком ID'))
- #   assert len(tabButtons) == 4
-
- #   for i in range(len(tabButtons)):
- #       actionChain.move_to_element(tabButtons[i]).click().perform()
- #       placeholderInput = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.rt-input__placeholder'))).text
- #       time.sleep(2)  # Для наглядности - в реальности тестирования закоментировать
- #       assert wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'rt-tab--active'))).text == driver.find_element(
- #           By.ID, consts.tabButtonsId[i]).text
- #       assert placeholderInput == consts.placeholderInputsValue[i]
-
-
-
-
-def test_back_to_login(): #  Проверка функциональности кнопки "Вернуться назад", на странице Восстановление пароля
+def test_back_to_login(): #  Проверка работоспособности кнопки "вернуться назад"
     driver, wait = get_driver()
 
     wait.until(EC.presence_of_element_located((By.XPATH, "//a[@id='forgot_password']"))).click()
@@ -239,11 +177,7 @@ def test_back_to_login(): #  Проверка функциональности �
     time.sleep(2)
 
 
-#сюда вставлять тесты
-
 test_back_to_login()
-#test_form_change()
-#test_registration_number()
 test_register()
 test_recovery()
 test_yandex()
@@ -252,10 +186,9 @@ test_mail()
 test_vk()
 test_ok()
 
-
 driver.get(url_login)
 
-driver.implicitly_wait(10) # неявное ожидание пока появится форма логина 10 сек
+driver.implicitly_wait(10)
 
 # кликаем на вкладку телефон
 el = driver.find_element_by_id('t-btn-tab-phone')
@@ -277,15 +210,9 @@ else:
 	print("Тест на некорректный номер НЕ пройден. ОШИБКА! " );
 print('####################################################')
 
-
 sleep(3)
 
-
-
 #################################################################################################################################
-
-
-
 
 # логин по телефону - вкладка №1
 
@@ -307,10 +234,8 @@ if (len(el2) > 0):
 	solve_cap()
 
 
-
 el = driver.find_element_by_id('password')
 el.send_keys(wrong_password)
-
 
 
 driver.find_element_by_css_selector('#kc-login').click();
@@ -322,7 +247,6 @@ if (len(el2) > 0):
 else:
 	print("Тест на некорректный номер + пароль НЕ пройден. ОШИБКА! " );
 print('####################################################')
-
 
 
 ####################################################
@@ -346,10 +270,8 @@ if (len(el2) > 0):
 	solve_cap()
 
 
-
 el = driver.find_element_by_id('password')
 el.send_keys(wrong_password)
-
 
 
 driver.find_element_by_css_selector('#kc-login').click();
@@ -361,8 +283,6 @@ if (len(el2) > 0):
 else:
 	print("Тест на некорректный email + пароль НЕ пройден. ОШИБКА! " );
 print('####################################################')
-
-
 
 
 ####################################################
@@ -386,10 +306,8 @@ if (len(el2) > 0):
 	solve_cap()
 
 
-
 el = driver.find_element_by_id('password')
 el.send_keys(wrong_password)
-
 
 
 driver.find_element_by_css_selector('#kc-login').click();
@@ -401,11 +319,7 @@ if (len(el2) > 0):
 else:
 	print("Тест на некорректный login + пароль НЕ пройден. ОШИБКА! " );
 print('####################################################')
-
-
 sleep(3)
-
-
 
 
 ####################################################
@@ -429,10 +343,8 @@ if (len(el2) > 0):
 	solve_cap()
 
 
-
 el = driver.find_element_by_id('password')
 el.send_keys(wrong_password)
-
 
 
 driver.find_element_by_css_selector('#kc-login').click();
@@ -444,10 +356,6 @@ if (len(el2) > 0):
 else:
 	print("Тест на некорректный лицевой счет + пароль НЕ пройден. ОШИБКА! " );
 print('####################################################')
-
-
-
-
 
 
 ####################################################
@@ -463,10 +371,6 @@ el = driver.find_element_by_id('address')
 
 # пытаемся ввести некореектный номер
 el.send_keys('75556')
-
-
-
-
 
 
 el = driver.find_element_by_id('password')
@@ -491,10 +395,8 @@ el.send_keys(Keys.DELETE)
 el.send_keys('v.zoomx@ya.ru')
 
 
-
 el = driver.find_element_by_id('password-confirm')
 el.send_keys(wrong_password)
-
 
 
 # проверяем не появилась ли капча
@@ -503,7 +405,6 @@ if (len(el2) > 0):
 	#input("Найдена капча... введите в окне капчу и нажмите здесь - ENTER");
 	print("Решаем капчу автоматически...");
 	solve_cap()
-
 
 
 el = driver.find_element_by_css_selector('input[name=firstName]')
@@ -523,7 +424,4 @@ else:
 print('####################################################')
 
 sys.exit();
-
 sleep(3)
-
-
